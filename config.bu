@@ -1,7 +1,38 @@
 variant: fcos
 version: 1.5.0
+storage:
+  files:
+    - path: /etc/hostname
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: pavane
+    - path: /etc/NetworkManager/system-connections/enp2s0.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=enp2s0
+          type=ethernet
+          interface-name=enp2s0
+          [ipv4]
+          method=auto
+    - path: /etc/NetworkManager/system-connections/enp3s0.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=enp3s0
+          type=ethernet
+          interface-name=enp3s0
+          [ipv4]
+          address1=192.168.0.4/31,192.168.0.3
+          dns=1.1.1.1;1.0.0.1
+          method=manual
 passwd:
   users:
     - name: chaya2z
+      groups:
+        - sudo
       ssh_authorized_keys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQ2xgTEcsuTZVzmfoxnEM/zkVeYxT85atSMK5xVxOK2
